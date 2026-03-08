@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RESYNTH — Playlist DNA Generator</title>
+<title>RESYNTH â Playlist DNA Generator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -184,7 +184,7 @@
   .playlist-card:hover { border-color: var(--accent); transform: translateY(-2px); }
   .playlist-card.selected { border-color: var(--accent); background: rgba(0,255,136,0.05); }
   .playlist-card.selected::after {
-    content: '✓'; position: absolute; top: 8px; right: 8px;
+    content: 'â'; position: absolute; top: 8px; right: 8px;
     background: var(--accent); color: #000; border-radius: 50%;
     width: 18px; height: 18px; font-size: 11px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
@@ -360,11 +360,11 @@
 
 <div class="now-playing" id="nowPlaying">
   <div class="np-info">
-    <div class="np-name" id="npName">—</div>
-    <div class="np-artist" id="npArtist">—</div>
+    <div class="np-name" id="npName">â</div>
+    <div class="np-artist" id="npArtist">â</div>
   </div>
   <div class="np-controls">
-    <button class="np-stop" onclick="stopPlayback()">■ Stop</button>
+    <button class="np-stop" onclick="stopPlayback()">â  Stop</button>
   </div>
 </div>
 
@@ -391,39 +391,39 @@
     <div class="connect-hero">
       <div class="step-label">// step 01</div>
       <h1>Decode your<br><span style="color:var(--accent)">playlist DNA.</span></h1>
-      <p class="subtitle">Connect Spotify, pick a playlist, and RESYNTH will analyze its genetic makeup — then synthesize a brand new one that sounds like it, but isn't.</p>
+      <p class="subtitle">Connect Spotify, pick a playlist, and RESYNTH will analyze its genetic makeup â then synthesize a brand new one that sounds like it, but isn't.</p>
     </div>
 
     <div class="connect-features">
-      <div class="feature-pill"><span class="icon">⬡</span> Genre mapping</div>
-      <div class="feature-pill"><span class="icon">⬡</span> Mood profiling</div>
-      <div class="feature-pill"><span class="icon">⬡</span> Era & decade split</div>
-      <div class="feature-pill"><span class="icon">⬡</span> Obscurity score</div>
-      <div class="feature-pill"><span class="icon">⬡</span> AI-written analysis</div>
-      <div class="feature-pill"><span class="icon">⬡</span> Smart recommendations</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> Genre mapping</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> Mood profiling</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> Era & decade split</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> Obscurity score</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> AI-written analysis</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> Smart recommendations</div>
     </div>
 
     <div class="card">
       <div class="input-group">
-        <label>Spotify Client ID <span style="color:var(--text-muted)">(required — from developer.spotify.com)</span></label>
+        <label>Spotify Client ID <span style="color:var(--text-muted)">(required â from developer.spotify.com)</span></label>
         <input type="text" id="clientIdInput" placeholder="e.g. 4a2b3c4d5e6f7a8b9c0d1e2f" />
       </div>
       <div class="input-group">
-        <label>Gemini API Key <span style="color:var(--text-muted)">(required — from aistudio.google.com)</span></label>
+        <label>Gemini API Key <span style="color:var(--text-muted)">(required â from aistudio.google.com)</span></label>
         <input type="password" id="geminiKeyInput" placeholder="AIza..." />
       </div>
       <div class="alert alert-info" style="margin-bottom: 20px;">
-        ℹ Keys stay in your browser only. Nothing is sent to any server except the official Spotify & Gemini APIs.
+        â¹ Keys stay in your browser only. Nothing is sent to any server except the official Spotify & Gemini APIs.
       </div>
       <button class="btn btn-spotify" onclick="connectSpotify()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
         Connect with Spotify
       </button>
-      <p class="text-dim" style="margin-top:12px;">Requires a free Spotify Developer app. <a href="https://developer.spotify.com/dashboard" target="_blank" style="color:var(--accent);text-decoration:none;">Create one here →</a></p>
+      <p class="text-dim" style="margin-top:12px;">Requires a free Spotify Developer app. <a href="https://developer.spotify.com/dashboard" target="_blank" style="color:var(--accent);text-decoration:none;">Create one here â</a></p>
     </div>
 
     <div class="card" style="margin-top: 8px;">
-      <p style="font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-bottom:12px;">⚡ QUICK SETUP: In your Spotify Developer app, set the redirect URI to:</p>
+      <p style="font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-bottom:12px;">â¡ QUICK SETUP: In your Spotify Developer app, set the redirect URI to:</p>
       <code style="display:block;background:var(--surface2);padding:10px 14px;border-radius:6px;font-size:12px;color:var(--accent);word-break:break-all;" id="redirectDisplay"></code>
     </div>
   </div>
@@ -452,9 +452,9 @@
     </div>
 
     <div class="mt-24 flex-between" id="step2Actions" style="display:none!important">
-      <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+      <button class="btn btn-ghost" onclick="goStep(1)">â Back</button>
       <button class="btn btn-primary" id="analyzeBtn" onclick="analyzePlaylist()" disabled>
-        Analyze DNA →
+        Analyze DNA â
       </button>
     </div>
   </div>
@@ -483,8 +483,8 @@
           <label>Era focus</label>
           <div class="toggle-group" id="eraFilter">
             <button class="toggle-pill active" data-val="any" onclick="toggleFilter(this,'era')">Any</button>
-            <button class="toggle-pill" data-val="60s-70s" onclick="toggleFilter(this,'era')">60s–70s</button>
-            <button class="toggle-pill" data-val="80s-90s" onclick="toggleFilter(this,'era')">80s–90s</button>
+            <button class="toggle-pill" data-val="60s-70s" onclick="toggleFilter(this,'era')">60sâ70s</button>
+            <button class="toggle-pill" data-val="80s-90s" onclick="toggleFilter(this,'era')">80sâ90s</button>
             <button class="toggle-pill" data-val="2000s" onclick="toggleFilter(this,'era')">2000s</button>
             <button class="toggle-pill" data-val="2010s" onclick="toggleFilter(this,'era')">2010s</button>
             <button class="toggle-pill" data-val="recent" onclick="toggleFilter(this,'era')">Recent</button>
@@ -525,9 +525,9 @@
       </div>
 
       <div class="flex-between mt-24">
-        <button class="btn btn-ghost" onclick="goStep(3)">← Back</button>
+        <button class="btn btn-ghost" onclick="goStep(3)">â Back</button>
         <button class="btn btn-primary" onclick="generatePlaylist()">
-          ⚡ Generate Playlist
+          â¡ Generate Playlist
         </button>
       </div>
     </div>
@@ -569,19 +569,41 @@ const state = {
 // ============================================================
 document.getElementById('redirectDisplay').textContent = window.location.origin + window.location.pathname;
 
+// PKCE helpers
+async function generateCodeVerifier() {
+  const array = new Uint8Array(64);
+  crypto.getRandomValues(array);
+  return btoa(String.fromCharCode(...array)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+}
+async function generateCodeChallenge(verifier) {
+  const data = new TextEncoder().encode(verifier);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  return btoa(String.fromCharCode(...new Uint8Array(digest))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+}
 // Handle OAuth callback
-window.addEventListener('load', () => {
-  const hash = window.location.hash.substring(1);
-  const params = new URLSearchParams(hash);
-  const token = params.get('access_token');
-  if (token) {
-    state.accessToken = token;
-    state.clientId = localStorage.getItem('resynth_client_id') || '';
-    state.geminiKey = localStorage.getItem('resynth_gemini_key') || '';
-    window.history.replaceState({}, document.title, window.location.pathname);
-    initConnected();
+window.addEventListener('load', async () => {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (code) {
+    const verifier = localStorage.getItem('resynth_pkce_verifier');
+    const clientId = localStorage.getItem('resynth_client_id') || '';
+    const redirectUri = window.location.origin + window.location.pathname;
+    const res = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ grant_type: 'authorization_code', code, redirect_uri: redirectUri, client_id: clientId, code_verifier: verifier })
+    });
+    const data = await res.json();
+    if (data.access_token) {
+      state.accessToken = data.access_token;
+      state.clientId = clientId;
+      state.geminiKey = localStorage.getItem('resynth_gemini_key') || '';
+      window.history.replaceState({}, document.title, window.location.pathname);
+      initConnected();
+    } else {
+      alert('Spotify auth failed: ' + (data.error_description || data.error));
+    }
   } else {
-    // Restore saved keys
     const cid = localStorage.getItem('resynth_client_id');
     const gk = localStorage.getItem('resynth_gemini_key');
     if (cid) document.getElementById('clientIdInput').value = cid;
@@ -606,18 +628,19 @@ function goStep(n) {
 // ============================================================
 // SPOTIFY AUTH
 // ============================================================
-function connectSpotify() {
+async function connectSpotify() {
   const clientId = document.getElementById('clientIdInput').value.trim();
   const geminiKey = document.getElementById('geminiKeyInput').value.trim();
   if (!clientId) { alert('Please enter your Spotify Client ID'); return; }
   if (!geminiKey) { alert('Please enter your Gemini API key'); return; }
   localStorage.setItem('resynth_client_id', clientId);
   localStorage.setItem('resynth_gemini_key', geminiKey);
-  state.clientId = clientId;
-  state.geminiKey = geminiKey;
+  const verifier = await generateCodeVerifier();
+  const challenge = await generateCodeChallenge(verifier);
+  localStorage.setItem('resynth_pkce_verifier', verifier);
   const redirectUri = window.location.origin + window.location.pathname;
   const scopes = 'playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private';
-  const url = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}&show_dialog=true`;
+  const url = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}&code_challenge_method=S256&code_challenge=${challenge}&show_dialog=true`;
   window.location.href = url;
 }
 
@@ -660,7 +683,7 @@ async function loadUserPlaylists() {
       const img = pl.images?.[0]?.url;
       const thumb = img
         ? `<img class="playlist-thumb" src="${img}" alt="${escHtml(pl.name)}">`
-        : `<div class="playlist-thumb-placeholder">♫</div>`;
+        : `<div class="playlist-thumb-placeholder">â«</div>`;
       html += `<div class="playlist-card" data-id="${pl.id}" data-name="${escHtml(pl.name)}" onclick="selectPlaylist(this, '${pl.id}', '${escHtml(pl.name).replace(/'/g,"\\'")}', ${pl.tracks.total})">
         ${thumb}
         <div class="playlist-name">${escHtml(pl.name)}</div>
@@ -699,7 +722,7 @@ async function loadPlaylistByUrl() {
     document.getElementById('analyzeBtn').disabled = false;
     document.getElementById('step2Actions').style.display = 'flex';
     const info = document.getElementById('playlistsContainer');
-    info.innerHTML = `<div class="alert alert-info">✓ Loaded: <strong>${escHtml(data.name)}</strong> (${data.tracks.total} tracks)</div>`;
+    info.innerHTML = `<div class="alert alert-info">â Loaded: <strong>${escHtml(data.name)}</strong> (${data.tracks.total} tracks)</div>`;
   } catch(e) {
     alert('Could not load playlist: ' + e.message);
   }
@@ -807,7 +830,7 @@ async function geminiCall(prompt) {
 }
 
 async function geminiAnalyze(tracks, dna) {
-  const prompt = `You are a music curator writing a playlist analysis. Given this playlist data, write a 3-4 sentence creative paragraph describing its "sonic DNA" — the vibe, character, and personality. Be evocative and specific, like a music journalist. Keep it to 4 sentences max.
+  const prompt = `You are a music curator writing a playlist analysis. Given this playlist data, write a 3-4 sentence creative paragraph describing its "sonic DNA" â the vibe, character, and personality. Be evocative and specific, like a music journalist. Keep it to 4 sentences max.
 
 Playlist name: "${state.selectedPlaylist.name}"
 Track count: ${dna.trackCount}
@@ -828,7 +851,7 @@ function renderDNA(dna, writeup) {
   const coverUrl = state.playlistTracks[0]?.album?.images?.[0]?.url;
   const coverEl = coverUrl
     ? `<img class="dna-cover" src="${coverUrl}" alt="cover">`
-    : `<div class="dna-cover-placeholder">♫</div>`;
+    : `<div class="dna-cover-placeholder">â«</div>`;
 
   const genreTags = dna.topGenres.map(g => `<span class="tag genre">${g}</span>`).join('');
   const decadeTags = dna.decades.map(([d, c]) => `<span class="tag decade">${d}s <span style="opacity:0.6">(${c})</span></span>`).join('');
@@ -856,7 +879,7 @@ function renderDNA(dna, writeup) {
       ${coverEl}
       <div>
         <h2>${escHtml(pl.name)}</h2>
-        <div class="text-dim">${dna.trackCount} tracks · ${dna.artistCount} artists</div>
+        <div class="text-dim">${dna.trackCount} tracks Â· ${dna.artistCount} artists</div>
       </div>
     </div>
 
@@ -874,8 +897,8 @@ function renderDNA(dna, writeup) {
     <div class="tags-row">${moodTags}</div>
 
     <div class="flex-between mt-24">
-      <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
-      <button class="btn btn-primary" onclick="goStep(4)">Tune & Generate →</button>
+      <button class="btn btn-ghost" onclick="goStep(2)">â Back</button>
+      <button class="btn btn-primary" onclick="goStep(4)">Tune & Generate â</button>
     </div>
   `;
 
@@ -953,7 +976,7 @@ PLAYLIST DNA:
 - Name: "${state.selectedPlaylist.name}"
 - Genres: ${dna.topGenres.join(', ')}
 - Primary era: ${dna.topDecade}s  
-- Avg popularity (0-100): ${dna.avgPopularity} — so ${dna.obscurity > 60 ? 'lean towards lesser-known tracks' : 'include some well-known tracks'}
+- Avg popularity (0-100): ${dna.avgPopularity} â so ${dna.obscurity > 60 ? 'lean towards lesser-known tracks' : 'include some well-known tracks'}
 - Original tracks sample: ${dna.sampleTracks.slice(0,15).join(' | ')}
 
 USER FILTERS:
@@ -1021,12 +1044,12 @@ function renderResults(tracks) {
   tracks.forEach((t, i) => {
     const artEl = t.albumArt
       ? `<img class="track-art" src="${t.albumArt}" alt="">`
-      : `<div class="track-art-placeholder">♫</div>`;
+      : `<div class="track-art-placeholder">â«</div>`;
     const playBtn = t.previewUrl
-      ? `<button class="play-btn" onclick="togglePreview(this,'${t.previewUrl}','${escAttr(t.title)}','${escAttr(t.artist)}')" title="30s preview">▶</button>`
-      : `<button class="play-btn" disabled title="No preview available" style="background:var(--surface2);color:var(--text-muted)">✕</button>`;
+      ? `<button class="play-btn" onclick="togglePreview(this,'${t.previewUrl}','${escAttr(t.title)}','${escAttr(t.artist)}')" title="30s preview">â¶</button>`
+      : `<button class="play-btn" disabled title="No preview available" style="background:var(--surface2);color:var(--text-muted)">â</button>`;
     const spotBtn = t.spotifyUrl
-      ? `<a href="${t.spotifyUrl}" target="_blank" style="color:var(--text-dim);font-size:18px;text-decoration:none" title="Open in Spotify">↗</a>`
+      ? `<a href="${t.spotifyUrl}" target="_blank" style="color:var(--text-dim);font-size:18px;text-decoration:none" title="Open in Spotify">â</a>`
       : '';
     tracklist += `
       <div class="track-item">
@@ -1036,7 +1059,7 @@ function renderResults(tracks) {
           <div class="track-name">${escHtml(t.title)}</div>
           <div class="track-artist">${escHtml(t.artist)}</div>
           <div class="track-reason">${escHtml(t.reason || '')}</div>
-          ${t.resembles ? `<div class="track-match">↳ resembles: ${escHtml(t.resembles)}</div>` : ''}
+          ${t.resembles ? `<div class="track-match">â³ resembles: ${escHtml(t.resembles)}</div>` : ''}
         </div>
         <div class="track-actions">
           ${playBtn}
@@ -1049,9 +1072,9 @@ function renderResults(tracks) {
     <div class="results-header">
       <div>
         <h2>Your new playlist</h2>
-        <div class="results-meta">Based on "${escHtml(pl.name)}" · ${foundCount}/${tracks.length} tracks found on Spotify</div>
+        <div class="results-meta">Based on "${escHtml(pl.name)}" Â· ${foundCount}/${tracks.length} tracks found on Spotify</div>
       </div>
-      <button class="btn btn-ghost" onclick="goStep(4)" style="font-size:13px">← Re-tune</button>
+      <button class="btn btn-ghost" onclick="goStep(4)" style="font-size:13px">â Re-tune</button>
     </div>
 
     <div class="track-list">${tracklist}</div>
@@ -1061,8 +1084,8 @@ function renderResults(tracks) {
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
         Save to Spotify
       </button>
-      <button class="btn btn-outline" onclick="generatePlaylist()">⟳ Regenerate</button>
-      <div class="text-dim">Click ▶ on any track for a 30-second preview</div>
+      <button class="btn btn-outline" onclick="generatePlaylist()">â³ Regenerate</button>
+      <div class="text-dim">Click â¶ on any track for a 30-second preview</div>
     </div>
   `;
 }
@@ -1080,7 +1103,7 @@ async function saveToSpotify() {
     const pl = await fetch(`https://api.spotify.com/v1/users/${me.id}/playlists`, {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + state.accessToken, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: `RESYNTH: ${state.selectedPlaylist.name}`, description: 'Generated by RESYNTH — playlist DNA engine', public: false })
+      body: JSON.stringify({ name: `RESYNTH: ${state.selectedPlaylist.name}`, description: 'Generated by RESYNTH â playlist DNA engine', public: false })
     }).then(r => r.json());
     // Add tracks
     await fetch(`https://api.spotify.com/v1/playlists/${pl.id}/tracks`, {
@@ -1088,7 +1111,7 @@ async function saveToSpotify() {
       headers: { 'Authorization': 'Bearer ' + state.accessToken, 'Content-Type': 'application/json' },
       body: JSON.stringify({ uris: trackIds.map(id => `spotify:track:${id}`) })
     });
-    alert(`✓ Playlist saved to Spotify as "RESYNTH: ${state.selectedPlaylist.name}"!`);
+    alert(`â Playlist saved to Spotify as "RESYNTH: ${state.selectedPlaylist.name}"!`);
   } catch(e) {
     alert('Could not save: ' + e.message);
   }
@@ -1104,7 +1127,7 @@ function togglePreview(btn, url, title, artist) {
   if (state.currentPlayBtn === btn && !audio.paused) {
     // Pause
     audio.pause();
-    btn.textContent = '▶';
+    btn.textContent = 'â¶';
     btn.classList.remove('playing');
     np.classList.remove('visible');
     state.currentPlayBtn = null;
@@ -1113,13 +1136,13 @@ function togglePreview(btn, url, title, artist) {
 
   // Stop previous
   if (state.currentPlayBtn) {
-    state.currentPlayBtn.textContent = '▶';
+    state.currentPlayBtn.textContent = 'â¶';
     state.currentPlayBtn.classList.remove('playing');
   }
 
   audio.src = url;
   audio.play().catch(() => {});
-  btn.textContent = '■';
+  btn.textContent = 'â ';
   btn.classList.add('playing');
   state.currentPlayBtn = btn;
   document.getElementById('npName').textContent = title;
@@ -1127,7 +1150,7 @@ function togglePreview(btn, url, title, artist) {
   np.classList.add('visible');
 
   audio.onended = () => {
-    btn.textContent = '▶';
+    btn.textContent = 'â¶';
     btn.classList.remove('playing');
     np.classList.remove('visible');
     state.currentPlayBtn = null;
@@ -1138,7 +1161,7 @@ function stopPlayback() {
   const audio = document.getElementById('audioPlayer');
   audio.pause();
   if (state.currentPlayBtn) {
-    state.currentPlayBtn.textContent = '▶';
+    state.currentPlayBtn.textContent = 'â¶';
     state.currentPlayBtn.classList.remove('playing');
     state.currentPlayBtn = null;
   }
