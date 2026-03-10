@@ -605,9 +605,7 @@ window.addEventListener('load', async () => {
     }
   } else {
     // Restore saved keys
-    const cid = localStorage.getItem('resynth_client_id');
     const gk = localStorage.getItem('resynth_gemini_key');
-    if (cid) document.getElementById('clientIdInput').value = cid;
     if (gk) document.getElementById('geminiKeyInput').value = gk;
   }
 });
