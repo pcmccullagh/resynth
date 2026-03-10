@@ -641,8 +641,10 @@ async function connectSpotify() {
   const challenge = await generateCodeChallenge(verifier);
   localStorage.setItem('resynth_pkce_verifier', verifier);
   const redirectUri = window.location.origin + window.location.pathname;
-  const scopes = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private';
+  const scopes = 'user-read-private user-read-email user-top-read user-library-read playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private';
   const url = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}&code_challenge_method=S256&code_challenge=${challenge}&show_dialog=true`;
+  console.log("AUTH_URL_SCOPES:", scopes);
+  console.log("AUTH_URL:", url.substring(0, 200));
   window.location.href = url;
 }
 
