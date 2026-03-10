@@ -768,12 +768,30 @@ async function analyzePlaylist() {
 }
 
 async function fetchAllTracks(playlistId) {
-  let tracks = [], url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=100`;
-  while (url) {
-    const data = await spotifyFetch(url);
-    (data.items || []).forEach(item => { if (item.track && item.track.id) tracks.push(item.track); });
-    url = data.next;
-    if (tracks.length >= 200) break; // cap at 200
+  let tracks = [];
+  // Fetch the playlist object first — it contains items inline (new API shape)
+  const pl = await spotifyFetch(`https://api.spotify.com/v1/playlists/${playlistId}`);
+  // New API: pl.items = {href, items[], next, total, ...}
+  // Old API had pl.tracks = {href, items[], next, total, ...} with item.track
+  // New API has pl.items.items[] with item.item (track object directly)
+  const paginated = pl.items || pl.tracks;
+  if (!paginated) return tracks;
+
+  function extractTracks(items) {
+    (items || []).forEach(item => {
+      // New shape: item.item is the track; old shape: item.track
+      const t = item.item || item.track;
+      if (t && t.id && t.type === 'track') tracks.push(t);
+    });
+  }
+
+  extractTracks(paginated.items);
+  let nextUrl = paginated.next;
+  while (nextUrl && tracks.length < 200) {
+    const page = await spotifyFetch(nextUrl);
+    // Pagination returns flat {items[], next} 
+    extractTracks(page.items || []);
+    nextUrl = page.next;
   }
   return tracks;
 }
