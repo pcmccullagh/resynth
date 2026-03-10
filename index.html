@@ -641,7 +641,7 @@ async function connectSpotify() {
   const challenge = await generateCodeChallenge(verifier);
   localStorage.setItem('resynth_pkce_verifier', verifier);
   const redirectUri = window.location.origin + window.location.pathname;
-  const scopes = 'playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private';
+  const scopes = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private';
   const url = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}&code_challenge_method=S256&code_challenge=${challenge}&show_dialog=true`;
   window.location.href = url;
 }
@@ -654,7 +654,14 @@ async function initConnected() {
 
 function updateHeaderStatus() {
   const el = document.getElementById('headerStatus');
-  el.innerHTML = `<span style="font-family:var(--mono);font-size:12px;color:var(--accent);display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;box-shadow:0 0 8px var(--accent)"></span>Connected</span>`;
+  el.innerHTML = `<span style="font-family:var(--mono);font-size:12px;color:var(--accent);display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;box-shadow:0 0 8px var(--accent)"></span>Connected <button onclick="forceReconnect()" style="background:transparent;border:1px solid var(--border);color:var(--text-dim);font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:4px;cursor:pointer;margin-left:4px">reconnect</button></span>`;
+}
+
+function forceReconnect() {
+  // Clear all stored auth state and force fresh login
+  localStorage.removeItem('resynth_pkce_verifier');
+  state.accessToken = null;
+  goStep(1);
 }
 
 // ============================================================
