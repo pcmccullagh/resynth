@@ -405,8 +405,7 @@
 
     <div class="card">
       <div class="input-group">
-        <label>Spotify Client ID <span style="color:var(--text-muted)">(required — from developer.spotify.com)</span></label>
-        <input type="text" id="clientIdInput" placeholder="e.g. 4a2b3c4d5e6f7a8b9c0d1e2f" />
+        <!-- Spotify Client ID hardcoded -->
       </div>
       <div class="input-group">
         <label>Gemini API Key <span style="color:var(--text-muted)">(required — from aistudio.google.com)</span></label>
@@ -631,11 +630,9 @@ function goStep(n) {
 // SPOTIFY AUTH
 // ============================================================
 async function connectSpotify() {
-  const clientId = document.getElementById('clientIdInput').value.trim();
+  const clientId = '3f0e7aefc82541d2bdb0b268d68ebc63';
   const geminiKey = document.getElementById('geminiKeyInput').value.trim();
-  if (!clientId) { alert('Please enter your Spotify Client ID'); return; }
   if (!geminiKey) { alert('Please enter your Gemini API key'); return; }
-  localStorage.setItem('resynth_client_id', clientId);
   localStorage.setItem('resynth_gemini_key', geminiKey);
   const verifier = await generateCodeVerifier();
   const challenge = await generateCodeChallenge(verifier);
