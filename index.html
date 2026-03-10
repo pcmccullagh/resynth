@@ -661,9 +661,14 @@ function updateHeaderStatus() {
 // SPOTIFY API HELPERS
 // ============================================================
 async function spotifyFetch(url) {
+  console.log('SPOTIFY_FETCH:', url.split('?')[0]);
   const res = await fetch(url, { headers: { 'Authorization': 'Bearer ' + state.accessToken } });
   if (res.status === 401) { alert('Spotify session expired. Please reconnect.'); goStep(1); throw new Error('Unauthorized'); }
-  if (!res.ok) throw new Error(`Spotify API error: ${res.status}`);
+  if (!res.ok) {
+    let body = ''; try { const j = await res.clone().json(); body = JSON.stringify(j); } catch(e) {}
+    console.error('SPOTIFY_403:', res.status, url.split('?')[0], body);
+    throw new Error('Spotify API error: ' + res.status);
+  }
   return res.json();
 }
 
@@ -719,7 +724,7 @@ async function loadPlaylistByUrl() {
   if (m) id = m[1];
   if (!id) { alert('Invalid playlist URL'); return; }
   try {
-    const data = await spotifyFetch(`https://api.spotify.com/v1/playlists/${id}?fields=id,name,tracks.total`);
+    const data = await spotifyFetch(`https://api.spotify.com/v1/playlists/${id}`);
     state.selectedPlaylist = { id: data.id, name: data.name, total: data.tracks.total };
     document.getElementById('analyzeBtn').disabled = false;
     document.getElementById('step2Actions').style.display = 'flex';
@@ -754,7 +759,7 @@ async function analyzePlaylist() {
 }
 
 async function fetchAllTracks(playlistId) {
-  let tracks = [], url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=100&fields=next,items(track(id,name,artists,album(images,release_date),preview_url,popularity,duration_ms))`;
+  let tracks = [], url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=100`;
   while (url) {
     const data = await spotifyFetch(url);
     (data.items || []).forEach(item => { if (item.track && item.track.id) tracks.push(item.track); });
