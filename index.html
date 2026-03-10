@@ -767,7 +767,8 @@ async function fetchAllTracks(playlistId) {
 async function buildDNA(tracks) {
   // Extract features from track data (no audio features API needed)
   const decades = {};
-  const artistSet = new Set();
+  const artistIdSet = new Set();
+  const artistNameSet = new Set();
   let totalPop = 0;
   const names = [];
 
@@ -775,7 +776,10 @@ async function buildDNA(tracks) {
     const year = t.album?.release_date ? parseInt(t.album.release_date.slice(0,4)) : 2000;
     const decade = Math.floor(year / 10) * 10;
     decades[decade] = (decades[decade] || 0) + 1;
-    t.artists?.forEach(a => artistSet.add(a.name));
+    t.artists?.forEach(a => {
+      if (a.id) artistIdSet.add(a.id);
+      if (a.name) artistNameSet.add(a.name);
+    });
     totalPop += t.popularity || 50;
     names.push(t.name + ' by ' + (t.artists?.[0]?.name || ''));
   });
@@ -784,8 +788,8 @@ async function buildDNA(tracks) {
   const sortedDecades = Object.entries(decades).sort((a,b) => b[1]-a[1]).slice(0, 5);
   const topDecade = sortedDecades[0]?.[0];
 
-  // Artist genre proxy via Spotify artist lookup (fetch up to 10 artists)
-  const sampleArtistIds = [...artistSet].slice(0, 10).join(',');
+  // Artist genre proxy via Spotify artist lookup (fetch up to 10 artists by ID)
+  const sampleArtistIds = [...artistIdSet].slice(0, 10).join(',');
   let genres = [];
   if (sampleArtistIds) {
     try {
@@ -804,7 +808,7 @@ async function buildDNA(tracks) {
 
   return {
     trackCount: tracks.length,
-    artistCount: artistSet.size,
+    artistCount: artistNameSet.size,
     avgPopularity: Math.round(avgPop),
     obscurity,
     topGenres,
