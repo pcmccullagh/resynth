@@ -417,6 +417,7 @@
           <option value="gemini">Gemini (Google)</option>
           <option value="claude">Claude (Anthropic)</option>
           <option value="deepseek">DeepSeek</option>
+          <option value="chatgpt">ChatGPT (OpenAI)</option>
         </select>
         <label id="aiKeyLabel">Gemini API Key <span style="color:var(--text-muted)" id="aiKeyHint">(aistudio.google.com)</span></label>
         <input type="password" id="geminiKeyInput" placeholder="AIza..." />
@@ -930,6 +931,24 @@ async function aiCall(prompt) {
     return data.choices?.[0]?.message?.content || '';
   }
 
+  if (provider === 'chatgpt') {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + key
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 1024
+      })
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'OpenAI API error'); }
+    const data = await res.json();
+    return data.choices?.[0]?.message?.content || '';
+  }
+
   throw new Error('Unknown AI provider: ' + provider);
 }
 
@@ -940,7 +959,8 @@ function updateAiProvider() {
   const hints = {
     gemini: { label: 'Gemini API Key', hint: 'aistudio.google.com', placeholder: 'AIza...' },
     claude: { label: 'Claude API Key', hint: 'console.anthropic.com', placeholder: 'sk-ant-...' },
-    deepseek: { label: 'DeepSeek API Key', hint: 'platform.deepseek.com', placeholder: 'sk-...' }
+    deepseek: { label: 'DeepSeek API Key', hint: 'platform.deepseek.com', placeholder: 'sk-...' },
+    chatgpt: { label: 'OpenAI API Key', hint: 'platform.openai.com', placeholder: 'sk-...' }
   };
   const h = hints[sel.value];
   document.getElementById('aiKeyLabel').childNodes[0].textContent = h.label + ' ';
