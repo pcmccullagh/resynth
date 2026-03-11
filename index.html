@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RESYNTH — Playlist DNA Generator</title>
+<title>RESYNTH â Playlist DNA Generator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -184,7 +184,7 @@
   .playlist-card:hover { border-color: var(--accent); transform: translateY(-2px); }
   .playlist-card.selected { border-color: var(--accent); background: rgba(0,255,136,0.05); }
   .playlist-card.selected::after {
-    content: '✓'; position: absolute; top: 8px; right: 8px;
+    content: 'â'; position: absolute; top: 8px; right: 8px;
     background: var(--accent); color: #000; border-radius: 50%;
     width: 18px; height: 18px; font-size: 11px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
@@ -360,11 +360,11 @@
 
 <div class="now-playing" id="nowPlaying">
   <div class="np-info">
-    <div class="np-name" id="npName">—</div>
-    <div class="np-artist" id="npArtist">—</div>
+    <div class="np-name" id="npName">â</div>
+    <div class="np-artist" id="npArtist">â</div>
   </div>
   <div class="np-controls">
-    <button class="np-stop" onclick="stopPlayback()">■ Stop</button>
+    <button class="np-stop" onclick="stopPlayback()">â  Stop</button>
   </div>
 </div>
 
@@ -391,38 +391,70 @@
     <div class="connect-hero">
       <div class="step-label">// step 01</div>
       <h1>Decode your<br><span style="color:var(--accent)">playlist DNA.</span></h1>
-      <p class="subtitle">Connect Spotify, pick a playlist, and RESYNTH will analyze its genetic makeup — then synthesize a brand new one that sounds like it, but isn't.</p>
+      <p class="subtitle">Connect Spotify, pick a playlist, and RESYNTH will analyze its genetic makeup â then synthesize a brand new one that sounds like it, but isn't.</p>
     </div>
 
     <div class="connect-features">
-      <div class="feature-pill"><span class="icon">⬡</span> Genre mapping</div>
-      <div class="feature-pill"><span class="icon">⬡</span> Mood profiling</div>
-      <div class="feature-pill"><span class="icon">⬡</span> Era & decade split</div>
-      <div class="feature-pill"><span class="icon">⬡</span> Obscurity score</div>
-      <div class="feature-pill"><span class="icon">⬡</span> AI-written analysis</div>
-      <div class="feature-pill"><span class="icon">⬡</span> Smart recommendations</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> Genre mapping</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> Mood profiling</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> Era & decade split</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> Obscurity score</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> AI-written analysis</div>
+      <div class="feature-pill"><span class="icon">â¬¡</span> Smart recommendations</div>
     </div>
 
     <div class="card">
-      <div class="input-group">
-        <!-- Spotify Client ID hardcoded -->
+      <!-- Source tabs -->
+      <div style="display:flex;gap:0;margin-bottom:20px;border-radius:8px;overflow:hidden;border:1px solid var(--border);">
+        <button id="tabSpotify" onclick="setSource('spotify')" style="flex:1;padding:10px;background:var(--accent);color:#000;font-family:var(--mono);font-size:12px;font-weight:700;border:none;cursor:pointer;">
+          &#9889; SPOTIFY
+        </button>
+        <button id="tabPaste" onclick="setSource('paste')" style="flex:1;padding:10px;background:var(--surface2);color:var(--text-muted);font-family:var(--mono);font-size:12px;font-weight:700;border:none;cursor:pointer;">
+          &#9889; PASTE TRACKLIST
+        </button>
       </div>
-      <div class="input-group">
-        <label>Gemini API Key <span style="color:var(--text-muted)">(required — from aistudio.google.com)</span></label>
-        <input type="password" id="geminiKeyInput" placeholder="AIza..." />
-      </div>
-      <div class="alert alert-info" style="margin-bottom: 20px;">
-        ℹ Keys stay in your browser only. Nothing is sent to any server except the official Spotify & Gemini APIs.
-      </div>
-      <button class="btn btn-spotify" onclick="connectSpotify()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        Connect with Spotify
-      </button>
-      <p class="text-dim" style="margin-top:12px;">Requires a free Spotify Developer app. <a href="https://developer.spotify.com/dashboard" target="_blank" style="color:var(--accent);text-decoration:none;">Create one here →</a></p>
-    </div>
 
-    <div class="card" style="margin-top: 8px;">
-      <p style="font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-bottom:12px;">⚡ QUICK SETUP: In your Spotify Developer app, set the redirect URI to:</p>
+      <!-- Spotify panel -->
+      <div id="panelSpotify">
+        <div class="input-group">
+          <label>Gemini API Key <span style="color:var(--text-muted)">(required &mdash; from aistudio.google.com)</span></label>
+          <input type="password" id="geminiKeyInput" placeholder="AIza..." />
+        </div>
+        <div class="alert alert-info" style="margin-bottom:20px;">
+          &#x2139; Keys stay in your browser only. Nothing is sent to any server except the official Spotify &amp; Gemini APIs.
+        </div>
+        <button class="btn btn-spotify" onclick="connectSpotify()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Connect with Spotify
+        </button>
+        <p class="text-dim" style="margin-top:12px;">Requires a free Spotify Developer app. <a href="https://developer.spotify.com/dashboard" target="_blank" style="color:var(--accent);text-decoration:none;">Create one here &rarr;</a></p>
+      </div>
+
+      <!-- Paste panel -->
+      <div id="panelPaste" style="display:none;">
+        <div class="input-group">
+          <label>Playlist name <span style="color:var(--text-muted)">(optional)</span></label>
+          <input type="text" id="pasteNameInput" placeholder="e.g. My Apple Music Chill Mix" />
+        </div>
+        <div class="input-group">
+          <label>Paste your tracklist</label>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Works with Apple Music, Tidal, YouTube Music, or any &ldquo;Artist &mdash; Title&rdquo; format. One track per line.</p>
+          <textarea id="pasteTracklist" rows="10" placeholder="Taylor Swift &#x2014; Anti-Hero&#10;The Weeknd &#x2014; Blinding Lights&#10;Harry Styles - As It Was&#10;Kendrick Lamar &#x2014; HUMBLE." style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;color:var(--text);font-family:var(--mono);font-size:13px;resize:vertical;box-sizing:border-box;"></textarea>
+        </div>
+        <div class="input-group">
+          <label>Gemini API Key <span style="color:var(--text-muted)">(required &mdash; from aistudio.google.com)</span></label>
+          <input type="password" id="geminiKeyInputPaste" placeholder="AIza..." />
+        </div>
+        <div class="alert alert-info" style="margin-bottom:20px;">
+          &#x2139; <strong>Apple Music:</strong> open playlist &rarr; select all (Cmd+A) &rarr; copy &rarr; paste here.<br>
+          <strong>Tidal / YouTube Music:</strong> any &ldquo;Artist &mdash; Title&rdquo; text works, one per line.
+        </div>
+        <button class="btn btn-primary" onclick="connectPaste()" style="width:100%;">
+          Analyze Tracklist &rarr;
+        </button>
+      </div>
+    </div>    <div class="card" style="margin-top: 8px;">
+      <p style="font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-bottom:12px;">â¡ QUICK SETUP: In your Spotify Developer app, set the redirect URI to:</p>
       <code style="display:block;background:var(--surface2);padding:10px 14px;border-radius:6px;font-size:12px;color:var(--accent);word-break:break-all;" id="redirectDisplay"></code>
     </div>
   </div>
@@ -451,9 +483,9 @@
     </div>
 
     <div class="mt-24 flex-between" id="step2Actions" style="display:none!important">
-      <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+      <button class="btn btn-ghost" onclick="goStep(1)">â Back</button>
       <button class="btn btn-primary" id="analyzeBtn" onclick="analyzePlaylist()" disabled>
-        Analyze DNA →
+        Analyze DNA â
       </button>
     </div>
   </div>
@@ -482,8 +514,8 @@
           <label>Era focus</label>
           <div class="toggle-group" id="eraFilter">
             <button class="toggle-pill active" data-val="any" onclick="toggleFilter(this,'era')">Any</button>
-            <button class="toggle-pill" data-val="60s-70s" onclick="toggleFilter(this,'era')">60s–70s</button>
-            <button class="toggle-pill" data-val="80s-90s" onclick="toggleFilter(this,'era')">80s–90s</button>
+            <button class="toggle-pill" data-val="60s-70s" onclick="toggleFilter(this,'era')">60sâ70s</button>
+            <button class="toggle-pill" data-val="80s-90s" onclick="toggleFilter(this,'era')">80sâ90s</button>
             <button class="toggle-pill" data-val="2000s" onclick="toggleFilter(this,'era')">2000s</button>
             <button class="toggle-pill" data-val="2010s" onclick="toggleFilter(this,'era')">2010s</button>
             <button class="toggle-pill" data-val="recent" onclick="toggleFilter(this,'era')">Recent</button>
@@ -524,9 +556,9 @@
       </div>
 
       <div class="flex-between mt-24">
-        <button class="btn btn-ghost" onclick="goStep(3)">← Back</button>
+        <button class="btn btn-ghost" onclick="goStep(3)">â Back</button>
         <button class="btn btn-primary" onclick="generatePlaylist()">
-          ⚡ Generate Playlist
+          â¡ Generate Playlist
         </button>
       </div>
     </div>
@@ -694,7 +726,7 @@ async function loadUserPlaylists() {
       const img = pl.images?.[0]?.url;
       const thumb = img
         ? `<img class="playlist-thumb" src="${img}" alt="${escHtml(pl.name)}">`
-        : `<div class="playlist-thumb-placeholder">♫</div>`;
+        : `<div class="playlist-thumb-placeholder">â«</div>`;
       html += `<div class="playlist-card" data-id="${pl.id}" data-name="${escHtml(pl.name)}" onclick="selectPlaylist(this, '${pl.id}', '${escHtml(pl.name).replace(/'/g,"\\'")}', ${pl.tracks?.total ?? 0})">
         ${thumb}
         <div class="playlist-name">${escHtml(pl.name)}</div>
@@ -733,7 +765,7 @@ async function loadPlaylistByUrl() {
     document.getElementById('analyzeBtn').disabled = false;
     document.getElementById('step2Actions').style.display = 'flex';
     const info = document.getElementById('playlistsContainer');
-    info.innerHTML = `<div class="alert alert-info">✓ Loaded: <strong>${escHtml(data.name)}</strong> (${data.tracks.total} tracks)</div>`;
+    info.innerHTML = `<div class="alert alert-info">â Loaded: <strong>${escHtml(data.name)}</strong> (${data.tracks.total} tracks)</div>`;
   } catch(e) {
     alert('Could not load playlist: ' + e.message);
   }
@@ -764,7 +796,7 @@ async function analyzePlaylist() {
 
 async function fetchAllTracks(playlistId) {
   let tracks = [];
-  // Fetch the playlist object first — it contains items inline (new API shape)
+  // Fetch the playlist object first â it contains items inline (new API shape)
   const pl = await spotifyFetch(`https://api.spotify.com/v1/playlists/${playlistId}`);
   // New API: pl.items = {href, items[], next, total, ...}
   // Old API had pl.tracks = {href, items[], next, total, ...} with item.track
@@ -863,7 +895,7 @@ async function geminiCall(prompt) {
 }
 
 async function geminiAnalyze(tracks, dna) {
-  const prompt = `You are a music curator writing a playlist analysis. Given this playlist data, write a 3-4 sentence creative paragraph describing its "sonic DNA" — the vibe, character, and personality. Be evocative and specific, like a music journalist. Keep it to 4 sentences max.
+  const prompt = `You are a music curator writing a playlist analysis. Given this playlist data, write a 3-4 sentence creative paragraph describing its "sonic DNA" â the vibe, character, and personality. Be evocative and specific, like a music journalist. Keep it to 4 sentences max.
 
 Playlist name: "${state.selectedPlaylist.name}"
 Track count: ${dna.trackCount}
@@ -884,7 +916,7 @@ function renderDNA(dna, writeup) {
   const coverUrl = state.playlistTracks[0]?.album?.images?.[0]?.url;
   const coverEl = coverUrl
     ? `<img class="dna-cover" src="${coverUrl}" alt="cover">`
-    : `<div class="dna-cover-placeholder">♫</div>`;
+    : `<div class="dna-cover-placeholder">â«</div>`;
 
   const genreTags = dna.topGenres.map(g => `<span class="tag genre">${g}</span>`).join('');
   const decadeTags = dna.decades.map(([d, c]) => `<span class="tag decade">${d}s <span style="opacity:0.6">(${c})</span></span>`).join('');
@@ -912,7 +944,7 @@ function renderDNA(dna, writeup) {
       ${coverEl}
       <div>
         <h2>${escHtml(pl.name)}</h2>
-        <div class="text-dim">${dna.trackCount} tracks · ${dna.artistCount} artists</div>
+        <div class="text-dim">${dna.trackCount} tracks Â· ${dna.artistCount} artists</div>
       </div>
     </div>
 
@@ -930,8 +962,8 @@ function renderDNA(dna, writeup) {
     <div class="tags-row">${moodTags}</div>
 
     <div class="flex-between mt-24">
-      <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
-      <button class="btn btn-primary" onclick="goStep(4)">Tune & Generate →</button>
+      <button class="btn btn-ghost" onclick="goStep(2)">â Back</button>
+      <button class="btn btn-primary" onclick="goStep(4)">Tune & Generate â</button>
     </div>
   `;
 
@@ -1009,7 +1041,7 @@ PLAYLIST DNA:
 - Name: "${state.selectedPlaylist.name}"
 - Genres: ${dna.topGenres.join(', ')}
 - Primary era: ${dna.topDecade}s  
-- Avg popularity (0-100): ${dna.avgPopularity} — so ${dna.obscurity > 60 ? 'lean towards lesser-known tracks' : 'include some well-known tracks'}
+- Avg popularity (0-100): ${dna.avgPopularity} â so ${dna.obscurity > 60 ? 'lean towards lesser-known tracks' : 'include some well-known tracks'}
 - Original tracks sample: ${dna.sampleTracks.slice(0,15).join(' | ')}
 
 USER FILTERS:
@@ -1077,12 +1109,12 @@ function renderResults(tracks) {
   tracks.forEach((t, i) => {
     const artEl = t.albumArt
       ? `<img class="track-art" src="${t.albumArt}" alt="">`
-      : `<div class="track-art-placeholder">♫</div>`;
+      : `<div class="track-art-placeholder">â«</div>`;
     const playBtn = t.previewUrl
-      ? `<button class="play-btn" onclick="togglePreview(this,'${t.previewUrl}','${escAttr(t.title)}','${escAttr(t.artist)}')" title="30s preview">▶</button>`
-      : `<button class="play-btn" disabled title="No preview available" style="background:var(--surface2);color:var(--text-muted)">✕</button>`;
+      ? `<button class="play-btn" onclick="togglePreview(this,'${t.previewUrl}','${escAttr(t.title)}','${escAttr(t.artist)}')" title="30s preview">â¶</button>`
+      : `<button class="play-btn" disabled title="No preview available" style="background:var(--surface2);color:var(--text-muted)">â</button>`;
     const spotBtn = t.spotifyUrl
-      ? `<a href="${t.spotifyUrl}" target="_blank" style="color:var(--text-dim);font-size:18px;text-decoration:none" title="Open in Spotify">↗</a>`
+      ? `<a href="${t.spotifyUrl}" target="_blank" style="color:var(--text-dim);font-size:18px;text-decoration:none" title="Open in Spotify">â</a>`
       : '';
     tracklist += `
       <div class="track-item">
@@ -1092,7 +1124,7 @@ function renderResults(tracks) {
           <div class="track-name">${escHtml(t.title)}</div>
           <div class="track-artist">${escHtml(t.artist)}</div>
           <div class="track-reason">${escHtml(t.reason || '')}</div>
-          ${t.resembles ? `<div class="track-match">↳ resembles: ${escHtml(t.resembles)}</div>` : ''}
+          ${t.resembles ? `<div class="track-match">â³ resembles: ${escHtml(t.resembles)}</div>` : ''}
         </div>
         <div class="track-actions">
           ${playBtn}
@@ -1105,9 +1137,9 @@ function renderResults(tracks) {
     <div class="results-header">
       <div>
         <h2>Your new playlist</h2>
-        <div class="results-meta">Based on "${escHtml(pl.name)}" · ${foundCount}/${tracks.length} tracks found on Spotify</div>
+        <div class="results-meta">Based on "${escHtml(pl.name)}" Â· ${foundCount}/${tracks.length} tracks found on Spotify</div>
       </div>
-      <button class="btn btn-ghost" onclick="goStep(4)" style="font-size:13px">← Re-tune</button>
+      <button class="btn btn-ghost" onclick="goStep(4)" style="font-size:13px">â Re-tune</button>
     </div>
 
     <div class="track-list">${tracklist}</div>
@@ -1117,8 +1149,8 @@ function renderResults(tracks) {
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
         Save to Spotify
       </button>
-      <button class="btn btn-outline" onclick="generatePlaylist()">⟳ Regenerate</button>
-      <div class="text-dim">Click ▶ on any track for a 30-second preview</div>
+      <button class="btn btn-outline" onclick="generatePlaylist()">â³ Regenerate</button>
+      <div class="text-dim">Click â¶ on any track for a 30-second preview</div>
     </div>
   `;
 }
@@ -1127,6 +1159,10 @@ function renderResults(tracks) {
 // SAVE TO SPOTIFY
 // ============================================================
 async function saveToSpotify() {
+  if (!state.accessToken) {
+    alert('To save to Spotify, please connect with Spotify first. Go back to step 1 and use the Spotify tab.');
+    return;
+  }
   const trackIds = state.generatedTracks.filter(t => t.found && t.spotifyId).map(t => t.spotifyId);
   if (trackIds.length === 0) { alert('No resolved tracks to save.'); return; }
   try {
@@ -1136,7 +1172,7 @@ async function saveToSpotify() {
     const pl = await fetch(`https://api.spotify.com/v1/users/${me.id}/playlists`, {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + state.accessToken, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: `RESYNTH: ${state.selectedPlaylist.name}`, description: 'Generated by RESYNTH — playlist DNA engine', public: false })
+      body: JSON.stringify({ name: `RESYNTH: ${state.selectedPlaylist.name}`, description: 'Generated by RESYNTH â playlist DNA engine', public: false })
     }).then(r => r.json());
     // Add tracks
     await fetch(`https://api.spotify.com/v1/playlists/${pl.id}/tracks`, {
@@ -1144,7 +1180,7 @@ async function saveToSpotify() {
       headers: { 'Authorization': 'Bearer ' + state.accessToken, 'Content-Type': 'application/json' },
       body: JSON.stringify({ uris: trackIds.map(id => `spotify:track:${id}`) })
     });
-    alert(`✓ Playlist saved to Spotify as "RESYNTH: ${state.selectedPlaylist.name}"!`);
+    alert(`â Playlist saved to Spotify as "RESYNTH: ${state.selectedPlaylist.name}"!`);
   } catch(e) {
     alert('Could not save: ' + e.message);
   }
@@ -1160,7 +1196,7 @@ function togglePreview(btn, url, title, artist) {
   if (state.currentPlayBtn === btn && !audio.paused) {
     // Pause
     audio.pause();
-    btn.textContent = '▶';
+    btn.textContent = 'â¶';
     btn.classList.remove('playing');
     np.classList.remove('visible');
     state.currentPlayBtn = null;
@@ -1169,13 +1205,13 @@ function togglePreview(btn, url, title, artist) {
 
   // Stop previous
   if (state.currentPlayBtn) {
-    state.currentPlayBtn.textContent = '▶';
+    state.currentPlayBtn.textContent = 'â¶';
     state.currentPlayBtn.classList.remove('playing');
   }
 
   audio.src = url;
   audio.play().catch(() => {});
-  btn.textContent = '■';
+  btn.textContent = 'â ';
   btn.classList.add('playing');
   state.currentPlayBtn = btn;
   document.getElementById('npName').textContent = title;
@@ -1183,7 +1219,7 @@ function togglePreview(btn, url, title, artist) {
   np.classList.add('visible');
 
   audio.onended = () => {
-    btn.textContent = '▶';
+    btn.textContent = 'â¶';
     btn.classList.remove('playing');
     np.classList.remove('visible');
     state.currentPlayBtn = null;
@@ -1194,7 +1230,7 @@ function stopPlayback() {
   const audio = document.getElementById('audioPlayer');
   audio.pause();
   if (state.currentPlayBtn) {
-    state.currentPlayBtn.textContent = '▶';
+    state.currentPlayBtn.textContent = 'â¶';
     state.currentPlayBtn.classList.remove('playing');
     state.currentPlayBtn = null;
   }
@@ -1212,6 +1248,173 @@ function escAttr(str) {
   if (!str) return '';
   return String(str).replace(/'/g,"\\'").replace(/"/g,'&quot;');
 }
+
+// ============================================================
+// PASTE TRACKLIST MODE
+// ============================================================
+
+function setSource(src) {
+  state.source = src;
+  document.getElementById('panelSpotify').style.display = src === 'spotify' ? '' : 'none';
+  document.getElementById('panelPaste').style.display = src === 'paste' ? '' : 'none';
+  const accent = 'var(--accent)', surface = 'var(--surface2)', black = '#000', muted = 'var(--text-muted)';
+  document.getElementById('tabSpotify').style.background = src === 'spotify' ? accent : surface;
+  document.getElementById('tabSpotify').style.color = src === 'spotify' ? black : muted;
+  document.getElementById('tabPaste').style.background = src === 'paste' ? accent : surface;
+  document.getElementById('tabPaste').style.color = src === 'paste' ? black : muted;
+}
+
+function parseTracklist(raw) {
+  // Handles formats:
+  // "Artist — Title"  (em dash, Apple Music default)
+  // "Artist - Title"  (hyphen)
+  // "Title\nArtist"  (two-line format some apps use)
+  // "1. Artist - Title" (numbered)
+  // Lines with just a title (treated as title-only, artist unknown)
+  const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 2);
+  const tracks = [];
+  for (let line of lines) {
+    // Strip leading numbers like "1." "01." "1 "
+    line = line.replace(/^\d+[\.\)\s]+/, '').trim();
+    // Try em dash split first, then hyphen
+    const emDash = line.split(/\s*[—–]\s*/);
+    if (emDash.length >= 2) {
+      tracks.push({ artist: emDash[0].trim(), title: emDash.slice(1).join(' — ').trim() });
+      continue;
+    }
+    // Hyphen split — be careful with titles that contain hyphens
+    // Only split on " - " (spaces around hyphen)
+    const hyphen = line.split(/\s+-\s+/);
+    if (hyphen.length >= 2) {
+      tracks.push({ artist: hyphen[0].trim(), title: hyphen.slice(1).join(' - ').trim() });
+      continue;
+    }
+    // No separator found — treat whole line as title with unknown artist
+    tracks.push({ artist: '', title: line });
+  }
+  return tracks.filter(t => t.title.length > 0);
+}
+
+async function enrichWithLastfm(parsedTracks) {
+  const LASTFM_KEY = 'b25b959554ed76058ac220b7b2e0a026';
+  // Enrich up to 50 tracks (rate limit friendly)
+  const subset = parsedTracks.slice(0, 50);
+  const enriched = await Promise.all(subset.map(async (t) => {
+    try {
+      const params = new URLSearchParams({
+        method: 'track.getInfo',
+        artist: t.artist || 'unknown',
+        track: t.title,
+        api_key: LASTFM_KEY,
+        format: 'json',
+        autocorrect: '1'
+      });
+      const r = await fetch('https://ws.audioscrobbler.com/2.0/?' + params);
+      const d = await r.json();
+      const info = d.track;
+      if (!info) return null;
+      const tags = info.toptags?.tag?.slice(0, 5).map(tg => tg.name) || [];
+      const listeners = parseInt(info.listeners || 0);
+      // Derive decade from wiki summary or just mark unknown
+      return {
+        id: Math.random().toString(36).slice(2),
+        name: info.name || t.title,
+        artists: [{ name: info.artist?.name || t.artist || 'Unknown Artist', id: null }],
+        album: { name: '', release_date: '' },
+        popularity: Math.min(100, Math.round(listeners / 5000)), // rough proxy
+        duration_ms: parseInt(info.duration || 0) * 1000,
+        tags,
+        source: 'lastfm'
+      };
+    } catch(e) {
+      // Fallback: use raw data with no enrichment
+      return {
+        id: Math.random().toString(36).slice(2),
+        name: t.title,
+        artists: [{ name: t.artist || 'Unknown Artist', id: null }],
+        album: { name: '', release_date: '' },
+        popularity: 50,
+        duration_ms: 0,
+        tags: [],
+        source: 'paste'
+      };
+    }
+  }));
+  return enriched.filter(Boolean);
+}
+
+async function connectPaste() {
+  const raw = document.getElementById('pasteTracklist').value.trim();
+  const geminiKey = document.getElementById('geminiKeyInputPaste').value.trim();
+  const name = document.getElementById('pasteNameInput').value.trim() || 'Pasted Playlist';
+
+  if (!raw) { alert('Please paste a tracklist first.'); return; }
+  if (!geminiKey) { alert('Please enter your Gemini API key.'); return; }
+
+  localStorage.setItem('resynth_gemini_key', geminiKey);
+  state.geminiKey = geminiKey;
+  state.source = 'paste';
+  state.pastePlaylistName = name;
+
+  const parsed = parseTracklist(raw);
+  if (parsed.length === 0) { alert('Could not parse any tracks. Try "Artist — Title" format, one per line.'); return; }
+
+  // Show loading on step 3 directly (skip step 2 playlist picker)
+  goStep(3);
+  document.getElementById('dnaContent').innerHTML = '<div class="loading-state"><div class="loader"></div><div class="loader-text">Enriching ' + parsed.length + ' tracks via Last.fm...</div></div>';
+
+  try {
+    const tracks = await enrichWithLastfm(parsed);
+    if (tracks.length === 0) throw new Error('Could not enrich any tracks. Check your tracklist format.');
+
+    state.selectedPlaylist = { name, id: 'paste', images: [] };
+    state.playlistTracks = tracks;
+
+    // Build DNA using Last.fm tags as genre proxy
+    const dna = buildDNAFromPaste(tracks);
+    state.dna = dna;
+
+    const writeup = await geminiAnalyze(tracks, dna);
+    renderDNA(dna, writeup, name);
+  } catch(e) {
+    document.getElementById('dnaContent').innerHTML = '<div class="alert alert-error">Analysis failed: ' + e.message + '</div>';
+  }
+}
+
+function buildDNAFromPaste(tracks) {
+  // Similar to buildDNA but uses Last.fm tags instead of Spotify genres
+  const tagCounts = {};
+  const artistNameSet = new Set();
+  let totalPop = 0;
+  const names = [];
+
+  tracks.forEach(t => {
+    artistNameSet.add(t.artists[0]?.name || 'Unknown');
+    totalPop += t.popularity || 50;
+    names.push(t.name);
+    (t.tags || []).forEach(tag => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    });
+  });
+
+  const genres = Object.entries(tagCounts)
+    .sort((a,b) => b[1]-a[1])
+    .slice(0,8)
+    .map(([g]) => g);
+
+  const avgPop = Math.round(totalPop / tracks.length);
+
+  return {
+    genres,
+    decades: {}, // Last.fm doesn't easily give release year
+    avgPopularity: avgPop,
+    obscurityScore: Math.max(0, 100 - avgPop),
+    topArtists: [...artistNameSet].slice(0,8),
+    trackNames: names.slice(0,20),
+    source: 'paste'
+  };
+}
+
 </script>
 </body>
 </html>
