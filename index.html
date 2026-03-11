@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <!-- resynth-v1773201835843 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RESYNTH — Playlist DNA Generator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -547,6 +551,8 @@
 </div><!-- /wrap -->
 
 <script>
+  const RESYNTH_CLIENT_ID = '3f0e7aefc82541d2bdb0b268d68ebc63';
+
 // ============================================================
 // STATE
 // ============================================================
@@ -591,7 +597,7 @@ window.addEventListener('load', async () => {
     const res = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ grant_type: 'authorization_code', code, redirect_uri: redirectUri, client_id: clientId, code_verifier: verifier })
+      body: new URLSearchParams({ grant_type: 'authorization_code', code, redirect_uri: redirectUri, client_id: RESYNTH_CLIENT_ID, code_verifier: verifier })
     });
     const data = await res.json();
     if (data.access_token) {
@@ -628,7 +634,7 @@ function goStep(n) {
 // SPOTIFY AUTH
 // ============================================================
 async function connectSpotify() {
-  const clientId = '3f0e7aefc82541d2bdb0b268d68ebc63';
+  const clientId = RESYNTH_CLIENT_ID;
   const geminiKey = document.getElementById('geminiKeyInput').value.trim();
   if (!geminiKey) { alert('Please enter your Gemini API key'); return; }
   localStorage.setItem('resynth_gemini_key', geminiKey);
