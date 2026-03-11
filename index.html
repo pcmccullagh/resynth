@@ -751,7 +751,8 @@ async function loadPlaylistByUrl() {
   if (!id) { alert('Invalid playlist URL'); return; }
   try {
     const data = await spotifyFetch(`https://api.spotify.com/v1/playlists/${id}`);
-    state.selectedPlaylist = { id: data.id, name: data.name, total: data.tracks.total };
+    const plTotal = data.items?.total ?? data.tracks?.total ?? 0;
+    state.selectedPlaylist = { id: data.id, name: data.name, total: plTotal };
     document.getElementById('analyzeBtn').disabled = false;
     document.getElementById('step2Actions').style.display = 'flex';
     const info = document.getElementById('playlistsContainer');
