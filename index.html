@@ -412,7 +412,13 @@
         <!-- Spotify Client ID hardcoded -->
       </div>
       <div class="input-group">
-        <label>Gemini API Key <span style="color:var(--text-muted)">(required — from aistudio.google.com)</span></label>
+        <label>AI Provider</label>
+        <select id="aiProviderSelect" onchange="updateAiProvider()" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-family:var(--mono);font-size:13px;margin-bottom:10px;">
+          <option value="gemini">Gemini (Google)</option>
+          <option value="claude">Claude (Anthropic)</option>
+          <option value="deepseek">DeepSeek</option>
+        </select>
+        <label id="aiKeyLabel">Gemini API Key <span style="color:var(--text-muted)" id="aiKeyHint">(aistudio.google.com)</span></label>
         <input type="password" id="geminiKeyInput" placeholder="AIza..." />
       </div>
       <div class="alert alert-info" style="margin-bottom: 20px;">
@@ -559,6 +565,7 @@
 const state = {
   clientId: '',
   geminiKey: '',
+  aiProvider: 'gemini', // 'gemini' | 'claude' | 'deepseek'
   accessToken: null,
   selectedPlaylist: null,
   playlistTracks: [],
@@ -613,6 +620,12 @@ window.addEventListener('load', async () => {
     // Restore saved keys
     const gk = localStorage.getItem('resynth_gemini_key');
     if (gk) document.getElementById('geminiKeyInput').value = gk;
+    const savedProvider = localStorage.getItem('resynth_ai_provider');
+    if (savedProvider) {
+      state.aiProvider = savedProvider;
+      const sel = document.getElementById('aiProviderSelect');
+      if (sel) { sel.value = savedProvider; updateAiProvider(); }
+    }
   }
 });
 
@@ -638,6 +651,8 @@ async function connectSpotify() {
   const geminiKey = document.getElementById('geminiKeyInput').value.trim();
   if (!geminiKey) { alert('Please enter your Gemini API key'); return; }
   localStorage.setItem('resynth_gemini_key', geminiKey);
+  state.aiProvider = document.getElementById('aiProviderSelect')?.value || state.aiProvider || 'gemini';
+  localStorage.setItem('resynth_ai_provider', state.aiProvider);
   const verifier = await generateCodeVerifier();
   const challenge = await generateCodeChallenge(verifier);
   localStorage.setItem('resynth_pkce_verifier', verifier);
@@ -857,15 +872,80 @@ async function buildDNA(tracks) {
 // GEMINI
 // ============================================================
 async function geminiCall(prompt) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${state.geminiKey}`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-  });
-  if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'Gemini API error'); }
-  const data = await res.json();
-  return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  return aiCall(prompt);
+}
+
+async function aiCall(prompt) {
+  const provider = state.aiProvider || 'gemini';
+  const key = state.geminiKey;
+  if (!key) throw new Error('No API key set. Please enter your API key.');
+
+  if (provider === 'gemini') {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'Gemini API error'); }
+    const data = await res.json();
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  }
+
+  if (provider === 'claude') {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-5',
+        max_tokens: 1024,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'Claude API error'); }
+    const data = await res.json();
+    return data.content?.[0]?.text || '';
+  }
+
+  if (provider === 'deepseek') {
+    const res = await fetch('https://api.deepseek.com/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + key
+      },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 1024
+      })
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'DeepSeek API error'); }
+    const data = await res.json();
+    return data.choices?.[0]?.message?.content || '';
+  }
+
+  throw new Error('Unknown AI provider: ' + provider);
+}
+
+function updateAiProvider() {
+  const sel = document.getElementById('aiProviderSelect');
+  state.aiProvider = sel.value;
+  localStorage.setItem('resynth_ai_provider', sel.value);
+  const hints = {
+    gemini: { label: 'Gemini API Key', hint: 'aistudio.google.com', placeholder: 'AIza...' },
+    claude: { label: 'Claude API Key', hint: 'console.anthropic.com', placeholder: 'sk-ant-...' },
+    deepseek: { label: 'DeepSeek API Key', hint: 'platform.deepseek.com', placeholder: 'sk-...' }
+  };
+  const h = hints[sel.value];
+  document.getElementById('aiKeyLabel').childNodes[0].textContent = h.label + ' ';
+  document.getElementById('aiKeyHint').textContent = '(' + h.hint + ')';
+  document.getElementById('geminiKeyInput').placeholder = h.placeholder;
 }
 
 async function geminiAnalyze(tracks, dna) {
